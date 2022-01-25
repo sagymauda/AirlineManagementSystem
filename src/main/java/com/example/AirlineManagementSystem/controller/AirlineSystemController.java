@@ -2,7 +2,7 @@ package com.example.AirlineManagementSystem.controller;
 
 
 import com.example.AirlineManagementSystem.dto.AirlineNameAndCurrentBalance;
-import com.example.AirlineManagementSystem.dto.DestinationsAndDistanceFromAirlineHomeBase;
+import com.example.AirlineManagementSystem.dto.DestinationsAndDistances;
 import com.example.AirlineManagementSystem.model.AirCraft;
 import com.example.AirlineManagementSystem.model.Airline;
 import com.example.AirlineManagementSystem.model.Destination;
@@ -39,7 +39,7 @@ public class AirlineSystemController {
 
     @GetMapping("airline/distance")
     @ResponseStatus(HttpStatus.OK)
-    public List<DestinationsAndDistanceFromAirlineHomeBase> retrieveListOfDistancesFromAirlineHomeBase(@RequestParam Long airlineId) {
+    public List<DestinationsAndDistances> distancesFromAirlineHomeBase(@RequestParam Long airlineId) {
 
         return destinationService.GetAllDistancesFromAirlineHomeBase(airlineId);
     }
@@ -50,6 +50,13 @@ public class AirlineSystemController {
 
         destinationService.saveDestination(destination);
     }
+
+    @GetMapping("destination/available")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Destination> getAllDestinationsOfAnAirlineByHomeBaseAndMaxDistanceOfPlain(@RequestParam Long airlineId){
+     return    destinationService.getAllDestinationsOfAirlineByHomeBaseAndMaxDistanceOfPlain(airlineId);
+    }
+
 
     @GetMapping("/airlinesAndCurrentBalance")
     @ResponseStatus(HttpStatus.OK)

@@ -1,9 +1,7 @@
 package com.example.AirlineManagementSystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -31,8 +29,9 @@ public class Airline {
     @Column(name = "current_balance")
     private Integer currentBalance;
 
-    @OneToOne
-    private Destination  homeBase;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "home_base", referencedColumnName = "id")
+    private Destination homeBase;
 
     @OneToMany(
             mappedBy = "airline",

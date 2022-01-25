@@ -29,25 +29,44 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Airline sellingAirline = Airline.builder().name("sellingAirline")
+                .initialBudget(1000)
+                .currentBalance(1000)
+                .homeBase(Destination.builder().name("SellingHOmeBase").
+                        location(Location.builder().latitude(22.1325).longitude(123.6324).build()).build()).build();
 
-        Airline sellingAirline = Airline.builder().name("sellingAirline").initialBudget(1000).currentBalance(1000).build();
-       Airline buyingAirline = Airline.builder().name("buyingAirline").initialBudget(2000).currentBalance(2000).build();
+        Airline buyingAirline = Airline.builder().name("buyingAirline")
+                .initialBudget(2000)
+                .currentBalance(2000)
+                .homeBase(Destination.builder().name("SellingHOmeBase").
+                        location(Location.builder().latitude(123.4575).longitude(23.3216).build()).build()).build();
+
         List<Airline> airLines = new ArrayList<>();
         airLines.add(sellingAirline);
         airLines.add(buyingAirline);
         airlineRepo.saveAll(airLines);
 
 
-        AirCraft airCraft1 = AirCraft.builder().airline(sellingAirline).originalPrice(100).maxDistance(60000)
-                .airline(sellingAirline).createdDate(Timestamp.valueOf(LocalDateTime.now())).build();
-        AirCraft airCraft2 = AirCraft.builder().airline(sellingAirline).originalPrice(50).maxDistance(40000)
-                .airline(sellingAirline).createdDate(Timestamp.valueOf(LocalDateTime.now())).build();
+        AirCraft airCraft1 = new AirCraft();
+        airCraft1.setAirline(sellingAirline);
+        airCraft1.setOriginalPrice(100);
+        airCraft1.setMaxDistance(6000);
+
+        AirCraft airCraft2 = new AirCraft();
+        airCraft2.setAirline(sellingAirline);
+        airCraft2.setOriginalPrice(50);
+        airCraft2.setMaxDistance(4000);
+
+        AirCraft airCraft3 = new AirCraft();
+        airCraft3.setAirline(sellingAirline);
+        airCraft3.setOriginalPrice(50);
+        airCraft3.setMaxDistance(20000);
 
         List<AirCraft> airCrafts = new ArrayList<>();
         airCrafts.add(airCraft1);
         airCrafts.add(airCraft2);
+        airCrafts.add(airCraft3);
         airCraftRepo.saveAll(airCrafts);
-
 
 
         Destination hawaii = Destination.builder().name("Hawaii")
@@ -61,6 +80,20 @@ public class InitData implements CommandLineRunner {
         destinations.add(thailand);
         destinationRepo.saveAll(destinations);
 
-    }
 
+
+        airCraftRepo.findAll().forEach(i -> {
+            System.out.println(i.getId() + " " + i.getOriginalPrice());
+        });
+
+
+        airlineRepo.findAll().forEach(i -> {
+            System.out.println(i.getName() + " " + i.getCurrentBalance());
+        });
+
+        List.of(1, 2, 3, 4);
+
+        Airline airline = airlineRepo.getById(1L);
+        System.out.println(airline);
+    }
 }

@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface AirlineRepo extends JpaRepository<Airline, Long> {
 
-    @Query(value = "SELECT Airline.name ,Airline.current_balance FROM Airline", nativeQuery = true)
-    List<AirlineNameAndCurrentBalance> finAllSortByCurrentBalanceDesc();
+//    @Query(value = "SELECT Airline.name ,Airline.current_balance FROM Airline", nativeQuery = true)
+//    List<AirlineNameAndCurrentBalance> finAllSortByCurrentBalanceDesc();
 }

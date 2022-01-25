@@ -3,7 +3,7 @@ package com.example.AirlineManagementSystem.utils;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.time.Duration;
+
 import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.temporal.ChronoUnit;

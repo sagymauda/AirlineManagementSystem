@@ -1,9 +1,6 @@
 package com.example.AirlineManagementSystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -22,17 +19,15 @@ public class AirCraft {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-
     private Integer originalPrice;
 
     private Integer maxDistance;
-
 
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdDate;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "airline_id")
     private Airline airline;
 }

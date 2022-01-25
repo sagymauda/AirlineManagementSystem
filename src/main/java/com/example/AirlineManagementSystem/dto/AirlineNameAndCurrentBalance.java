@@ -1,11 +1,11 @@
 package com.example.AirlineManagementSystem.dto;
 
-public interface AirlineNameAndCurrentBalance {
+import lombok.Data;
 
-        String getName();
-        Integer getCurrentBalance();
+@Data
+public class AirlineNameAndCurrentBalance {
 
+    private String name;
 
-
-
+    private Integer currentBalance;
 }

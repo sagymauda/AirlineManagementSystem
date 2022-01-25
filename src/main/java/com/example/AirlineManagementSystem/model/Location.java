@@ -1,9 +1,7 @@
 package com.example.AirlineManagementSystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -24,8 +22,7 @@ public class Location {
 
     private Double longitude;
 
-    @OneToOne(mappedBy = "location")
-    private Destination destination;
+
 
 
 
