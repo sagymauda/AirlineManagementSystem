@@ -12,8 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,20 +79,5 @@ public class InitData implements CommandLineRunner {
         destinations.add(thailand);
         destinationRepo.saveAll(destinations);
 
-
-
-        airCraftRepo.findAll().forEach(i -> {
-            System.out.println(i.getId() + " " + i.getOriginalPrice());
-        });
-
-
-        airlineRepo.findAll().forEach(i -> {
-            System.out.println(i.getName() + " " + i.getCurrentBalance());
-        });
-
-        List.of(1, 2, 3, 4);
-
-        Airline airline = airlineRepo.getById(1L);
-        System.out.println(airline);
     }
 }

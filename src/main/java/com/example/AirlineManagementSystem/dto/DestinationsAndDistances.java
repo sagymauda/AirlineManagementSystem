@@ -4,6 +4,8 @@ import lombok.Data;
 
 @Data
 public class DestinationsAndDistances {
+
     private String destinationName;
+
     private Double distanceFromHomeBse;
 }

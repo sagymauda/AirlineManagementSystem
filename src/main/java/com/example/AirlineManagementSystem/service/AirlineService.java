@@ -24,7 +24,7 @@ public class AirlineService {
 
     @Transactional
     public List<AirlineNameAndCurrentBalance> getAllAirlinesWithCurrentBalance() {
-        log.info("Anew Request Has Been Made To FindAll Airlines");
+        log.info("invoking retrieveListOfAirlinesAndTheirCurrentBalance Api");
         airlineRepo.findAll();
         List<AirlineNameAndCurrentBalance> airlineNameAndCurrentBalanceList = new ArrayList<>();
         airlineRepo.findAll().forEach(i -> {
@@ -37,7 +37,7 @@ public class AirlineService {
 
     }
 
-    @SneakyThrows
+
     @Transactional
     public void saveAirline(Airline airline) {
         log.info("Anew Request Has Been Made To Save Airline With Details : {}, ", airline);

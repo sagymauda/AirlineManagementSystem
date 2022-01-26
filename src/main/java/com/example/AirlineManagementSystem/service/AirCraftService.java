@@ -35,7 +35,8 @@ public class AirCraftService {
     @SneakyThrows
     @Transactional
     public void saveAirCraft(AirCraft airCraft, Long id) {
-        log.info("A new Request Has Been Made To Save Airline With Details : {}, ", airCraft);
+
+        log.info("Anew Request Has Been Made To Save AirCraft To Airline Company With id:" + id + " With Details : {} ", airCraft);
         Airline airline = airlineRepo.getById(id);
         airCraft.setAirline(airline);
 
@@ -52,19 +53,15 @@ public class AirCraftService {
         log.info("A new Request Has Been Made To Trade Aircraft With id" + " " + airCraftId + "From company id" + " " + sellingAirlineId +
                 " " + "To Company id" + "  " + buyingAirlineId);
 
-
         AirCraft airCraftToSell = airCraftRepo.getById(airCraftId);
-
-
-        System.out.println("hhhh" + airCraftToSell);
-        /*check if airCraft is owned by selling company*/
 
 
         /*check if airCraft is owned by selling company*/
         if (Objects.equals(airCraftToSell.getAirline().getId(), sellingAirlineId)) {
+
             /*then calculate the num of moths in use*/
-            //  Integer numOfMonthsInUse = calculateAirCraftDate.calculateMountsInUse(airCraftToSell.getCreatedDate());
-            sellingPrice = calculateAirCraftPrice.calculatePrice(airCraftToSell.getOriginalPrice(), 6);
+            Integer numOfMonthsInUse = calculateAirCraftDate.calculateMountsInUse(airCraftToSell.getCreatedDate());
+            sellingPrice = calculateAirCraftPrice.calculatePrice(airCraftToSell.getOriginalPrice(), numOfMonthsInUse);
 
             /*now I need to see if the other company have that amount of money*/
             Airline buyingAirline = airlineRepo.getById(buyingAirlineId);

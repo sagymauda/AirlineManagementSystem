@@ -1,6 +1,5 @@
 package com.example.AirlineManagementSystem.service;
 
-
 import com.example.AirlineManagementSystem.dto.DestinationsAndDistances;
 import com.example.AirlineManagementSystem.model.AirCraft;
 import com.example.AirlineManagementSystem.model.Airline;
@@ -8,14 +7,14 @@ import com.example.AirlineManagementSystem.model.Destination;
 import com.example.AirlineManagementSystem.repository.AirlineRepo;
 import com.example.AirlineManagementSystem.repository.DestinationRepo;
 import com.example.AirlineManagementSystem.utils.HaversineFormula;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,16 +32,19 @@ public class DestinationService {
 
     @Transactional
     public void saveDestination(Destination destination) {
+        log.info("invoking addDestination Api With Destination {}," + destination.toString());
+
         destinationRepo.save(destination);
     }
 
     @Transactional
     public List<DestinationsAndDistances> GetAllDistancesFromAirlineHomeBase(Long airlineId) {
 
-        Airline airline = airlineRepo.getById(airlineId);
-        List<DestinationsAndDistances> destinationsAndDistancesList = new ArrayList<>();
+        log.info("invoking GetAllDistancesFromAirlineHomeBase Api With Airline Id {}," + airlineId);
 
-        // lets say just for now that it return me the latitude and longitude
+        Airline airline = airlineRepo.getById(airlineId);
+
+        List<DestinationsAndDistances> destinationsAndDistancesList = new ArrayList<>();
         airline.getHomeBase().getLocation().getLatitude();
         double latitude = airline.getHomeBase().getLocation().getLatitude();
         double longitude = airline.getHomeBase().getLocation().getLongitude();
@@ -62,10 +64,12 @@ public class DestinationService {
         return destinationsAndDistancesList;
     }
 
+
     @Transactional
     public List<Destination> getAllDestinationsOfAirlineByHomeBaseAndMaxDistanceOfPlain(Long airlineId) {
 
-        //object inside lambda needs to be final
+        log.info("invoking getAllDestinationsOfAirlineByHomeBaseAndMaxDistanceOfPlain Api With Airline Id {}," + airlineId);
+
         Airline airline = airlineRepo.getById(airlineId);
         List<AirCraft> airCrafts = airline.getAirCrafts();
         List<Destination> destinationList = destinationRepo.findAll();
